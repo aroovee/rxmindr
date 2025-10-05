@@ -3,6 +3,8 @@
 import SwiftUI
 
 struct OnboardingPage: Identifiable{
+    var id: ObjectIdentifier
+    
     let text: String
     let image: String
     let description: String
@@ -32,7 +34,5 @@ struct OnboardingPageView: View {
     
     
     
-    #Preview {
-        OnboardingPageView()
-    }
+
 

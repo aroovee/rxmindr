@@ -1,0 +1,64 @@
+{
+  "source": "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/MedboxPrescriptionManager/SymptomTrackingView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Symptom Tracker",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 46
+        }
+      },
+      {
+        "comment": "",
+        "key": "Select Your Symptoms",
+        "location": {
+          "startingColumn": 42,
+          "startingLine": 15
+        }
+      },
+      {
+        "comment": "",
+        "key": "Analyze Symptoms",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 35
+        }
+      },
+      {
+        "comment": "",
+        "key": "Potential Causes",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 102
+        }
+      },
+      {
+        "comment": "",
+        "key": "Done",
+        "location": {
+          "startingColumn": 50,
+          "startingLine": 103
+        }
+      },
+      {
+        "comment": "",
+        "key": "No direct correlations found between your symptoms and current medications.",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 89
+        }
+      },
+      {
+        "comment": "",
+        "key": "May cause: %@",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 96
+        }
+      }
+    ]
+  },
+  "version": 1
+}

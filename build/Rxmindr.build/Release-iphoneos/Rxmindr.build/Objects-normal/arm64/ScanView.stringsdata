@@ -1,0 +1,168 @@
+{
+  "source": "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/MedboxPrescriptionManager/ScanView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Scan Prescription",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 46
+        }
+      },
+      {
+        "comment": "",
+        "key": "Scan Your Prescription",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 99
+        }
+      },
+      {
+        "comment": "",
+        "key": "Quickly add medications by scanning your prescription label or bottle",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 103
+        }
+      },
+      {
+        "comment": "",
+        "key": "Choose Scan Method",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 131
+        }
+      },
+      {
+        "comment": "",
+        "key": "Scanning Tips",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 258
+        }
+      },
+      {
+        "comment": "",
+        "key": "Can't scan right now?",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 321
+        }
+      },
+      {
+        "comment": "",
+        "key": "Add Prescription Manually",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 329
+        }
+      },
+      {
+        "comment": "",
+        "key": "Scanner",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 465
+        }
+      },
+      {
+        "comment": "",
+        "key": "Camera Scanner",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 407
+        }
+      },
+      {
+        "comment": "",
+        "key": "Prepare your camera to scan prescription labels and bottles",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 411
+        }
+      },
+      {
+        "comment": "",
+        "key": "Start Scanning",
+        "location": {
+          "startingColumn": 32,
+          "startingLine": 422
+        }
+      },
+      {
+        "comment": "",
+        "key": "Add Manually Instead",
+        "location": {
+          "startingColumn": 32,
+          "startingLine": 443
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cancel",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 469
+        }
+      },
+      {
+        "comment": "",
+        "key": "Select Photo",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 630
+        }
+      },
+      {
+        "comment": "",
+        "key": "Photo Library",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 543
+        }
+      },
+      {
+        "comment": "",
+        "key": "Select a photo of your prescription from your library",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 547
+        }
+      },
+      {
+        "comment": "",
+        "key": "Best Results Tips",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 563
+        }
+      },
+      {
+        "comment": "",
+        "key": "Choose from Photos",
+        "location": {
+          "startingColumn": 32,
+          "startingLine": 587
+        }
+      },
+      {
+        "comment": "",
+        "key": "Add Manually Instead",
+        "location": {
+          "startingColumn": 32,
+          "startingLine": 608
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cancel",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 634
+        }
+      }
+    ]
+  },
+  "version": 1
+}

@@ -1,6 +1,6 @@
 import Foundation
 
-struct Prescription: Identifiable, Codable {
+struct Prescription: Identifiable, Codable, Equatable {
     let id: UUID
     var name: String
     var dose: String
@@ -11,12 +11,25 @@ struct Prescription: Identifiable, Codable {
     var reminderTimes: [ReminderTime]
     var isTaken: Bool
     var lastTaken: Date?
+    var recordTaken: [Date] = []
     var drugInfo: DrugInformation?
     var hasConflicts: Bool
     var conflicts: [String]
     
+    // Refill tracking fields
+    var totalPills: Int?
+    var pillsRemaining: Int?
+    var refillDate: Date?
+    var prescriptionNumber: String?
+    var pharmacy: String?
+    var physicianName: String?
     
-    struct ReminderTime: Codable, Identifiable {
+    // Travel mode fields
+    var isEssentialForTravel: Bool = false
+    var travelNotes: String?
+    
+    
+    struct ReminderTime: Codable, Identifiable, Equatable {
         let id: UUID
         var time: Date
         var isEnabled: Bool
@@ -40,7 +53,15 @@ struct Prescription: Identifiable, Codable {
          lastTaken: Date? = nil,
          hasConflicts: Bool = false,
          conflicts: [String] = [],
-         drugInfo: DrugInformation? = nil) {
+         drugInfo: DrugInformation? = nil,
+         totalPills: Int? = nil,
+         pillsRemaining: Int? = nil,
+         refillDate: Date? = nil,
+         prescriptionNumber: String? = nil,
+         pharmacy: String? = nil,
+         physicianName: String? = nil,
+         isEssentialForTravel: Bool = false,
+         travelNotes: String? = nil) {
          
         self.id = id
         self.name = name
@@ -55,6 +76,13 @@ struct Prescription: Identifiable, Codable {
         self.drugInfo = drugInfo
         self.hasConflicts = hasConflicts
         self.conflicts = []
-        
+        self.totalPills = totalPills
+        self.pillsRemaining = pillsRemaining
+        self.refillDate = refillDate
+        self.prescriptionNumber = prescriptionNumber
+        self.pharmacy = pharmacy
+        self.physicianName = physicianName
+        self.isEssentialForTravel = isEssentialForTravel
+        self.travelNotes = travelNotes
     }
 }

@@ -1,0 +1,48 @@
+{
+  "source": "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/MedboxPrescriptionManager/OnboardingView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Skip",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 38
+        }
+      },
+      {
+        "comment": "",
+        "key": "Get Started",
+        "location": {
+          "startingColumn": 67,
+          "startingLine": 89
+        }
+      },
+      {
+        "comment": "",
+        "key": "Continue",
+        "location": {
+          "startingColumn": 83,
+          "startingLine": 89
+        }
+      },
+      {
+        "comment": "",
+        "key": "Step \\(currentPage + 1) of \\(pages.count)",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 115
+        }
+      },
+      {
+        "comment": "",
+        "key": "Back",
+        "location": {
+          "startingColumn": 36,
+          "startingLine": 122
+        }
+      }
+    ]
+  },
+  "version": 1
+}

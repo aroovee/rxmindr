@@ -7,45 +7,209 @@ struct DrugSearchResult: Identifiable {
 }
 
 class NDCDatabaseProcessor {
-    static var drugNames: Set<String> = []  // Changed to Set for uniqueness
+    static var drugNames: Set<String> = []
+    static var searchIndex: [String: [String]] = [:]
     static var isLoaded = false
+    static var isLoading = false
+    private static var searchCache: [String: [DrugSearchResult]] = [:]
+    private static let cacheLimit = 100
+    private static let processingQueue = DispatchQueue(label: "com.medbox.csv.processing", qos: .utility)
     
     static func processDatabase() {
+        // Prevent multiple concurrent processing
+        guard !isLoading else { return }
+        
+        // Start with fallback medications immediately for instant functionality
+        loadFallbackMedications()
+        
+        // Process CSV in background
+        processingQueue.async {
+            processDatabaseAsync()
+        }
+    }
+    
+    private static func processDatabaseAsync() {
+        isLoading = true
+        
         guard let csvPath = Bundle.main.path(forResource: "20220906_product", ofType: "csv") else {
-              print("CSV file not found in bundle")
-              return
-          }
-          
-          let fileManager = FileManager.default
-          guard let documentsURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first else {
-              print("Unable to access documents directory")
-              return
-          }
-          
-          let fileURL = documentsURL.appendingPathComponent("drug_names.txt")
+            print("CSV file not found in bundle - using fallback medications")
+            DispatchQueue.main.async {
+                isLoading = false
+            }
+            return
+        }
+        
+        guard let fileHandle = FileHandle(forReadingAtPath: csvPath) else {
+            print("Could not open CSV file - using fallback medications")
+            DispatchQueue.main.async {
+                isLoading = false
+            }
+            return
+        }
+        
+        defer {
+            fileHandle.closeFile()
+        }
+        
         do {
-            let content = try String(contentsOfFile: csvPath, encoding: .utf8)
-            let rawDrugNames = content.components(separatedBy: .newlines)
-                .filter { !$0.isEmpty }
+            // Stream process the file to avoid loading entire file into memory
+            try processCSVStream(fileHandle: fileHandle)
+        } catch {
+            print("Error processing CSV: \(error)")
+        }
+        
+        DispatchQueue.main.async {
+            isLoading = false
+        }
+    }
+    
+    private static func processCSVStream(fileHandle: FileHandle) throws {
+        let chunkSize = 1024 * 1024 // 1MB chunks
+        var buffer = Data()
+        var processedNames = Set<String>(drugNames) // Start with existing fallback names
+        var lineCount = 0
+        var isFirstChunk = true
+        
+        print("Starting streaming CSV processing...")
+        
+        while true {
+            let chunk = fileHandle.readData(ofLength: chunkSize)
+            if chunk.isEmpty { break }
             
-            // Process and deduplicate drug names
-            var processedNames = Set<String>()
+            buffer.append(chunk)
             
-            for drugName in rawDrugNames {
-                let processed = processDrugName(drugName)
-                if !processed.isEmpty {
-                    processedNames.insert(processed)
+            // Process complete lines from buffer
+            while let newlineRange = buffer.range(of: Data([10])) { // ASCII newline
+                let lineData = buffer.subdata(in: 0..<newlineRange.lowerBound)
+                buffer.removeSubrange(0..<newlineRange.upperBound)
+                
+                guard let line = String(data: lineData, encoding: .utf8), !line.isEmpty else { continue }
+                
+                // Skip header row
+                if isFirstChunk && lineCount == 0 {
+                    isFirstChunk = false
+                    lineCount += 1
+                    continue
+                }
+                
+                // Process line in chunks to avoid blocking
+                if lineCount % 100 == 0 {
+                    // Yield control every 100 lines to prevent blocking
+                    Thread.sleep(forTimeInterval: 0.001)
+                }
+                
+                // Process the CSV line
+                processCSVLine(line, into: &processedNames)
+                lineCount += 1
+                
+                // Update progress periodically
+                if lineCount % 5000 == 0 {
+                    let currentCount = processedNames.count
+                    print("Processed \(lineCount) lines, found \(currentCount) unique drugs...")
+                    
+                    // Update the main data periodically for progressive enhancement
+                    DispatchQueue.main.async {
+                        self.drugNames = processedNames
+                        self.buildSearchIndex()
+                    }
+                }
+                
+                // Safety check to prevent memory issues
+                if lineCount > 100000 { // Limit processing to prevent crashes
+                    print("Reached processing limit of 100k lines for performance")
+                    break
                 }
             }
+        }
+        
+        // Process any remaining data in buffer
+        if !buffer.isEmpty, let line = String(data: buffer, encoding: .utf8), !line.isEmpty {
+            processCSVLine(line, into: &processedNames)
+        }
+        
+        // Final update on main thread
+        DispatchQueue.main.async {
+            self.drugNames = processedNames
+            self.buildSearchIndex()
+            self.isLoaded = true
             
-            drugNames = processedNames
+            print("CSV processing complete: \(processedNames.count) unique drugs from \(lineCount) records")
+            print("Sample drugs: \(Array(processedNames).prefix(10))")
+        }
+    }
+    
+    private static func processCSVLine(_ line: String, into processedNames: inout Set<String>) {
+        let fields = parseCSVLine(line)
+        
+        // Get proprietary name (brand name) - column index 3 (0-based)
+        // Get non-proprietary name (generic name) - column index 5 (0-based)
+        guard fields.count > 5 else { return }
+        
+        let proprietaryName = fields[3].trimmingCharacters(in: .whitespacesAndNewlines)
+        let nonProprietaryName = fields[5].trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        // Add both proprietary (brand) and non-proprietary (generic) names if they exist
+        if !proprietaryName.isEmpty && proprietaryName.lowercased() != "null" {
+            let processed = processDrugName(proprietaryName)
+            if !processed.isEmpty && processed.count > 2 { // Filter very short names
+                processedNames.insert(processed)
+            }
+        }
+        
+        if !nonProprietaryName.isEmpty && nonProprietaryName.lowercased() != "null" {
+            let processed = processDrugName(nonProprietaryName)
+            if !processed.isEmpty && processed.count > 2 { // Filter very short names
+                processedNames.insert(processed)
+            }
+        }
+    }
+    
+    private static func parseCSVLine(_ line: String) -> [String] {
+        var fields: [String] = []
+        var currentField = ""
+        var insideQuotes = false
+        var i = line.startIndex
+        
+        while i < line.endIndex {
+            let char = line[i]
+            
+            if char == "\"" {
+                insideQuotes.toggle()
+            } else if char == "," && !insideQuotes {
+                fields.append(currentField)
+                currentField = ""
+            } else {
+                currentField.append(char)
+            }
+            
+            i = line.index(after: i)
+        }
+        
+        // Add the last field
+        fields.append(currentField)
+        
+        return fields.map { $0.replacingOccurrences(of: "\"", with: "") }
+    }
+    
+    private static func loadFallbackMedications() {
+        let fallbackMeds = [
+            "Amoxicillin", "Metformin", "Lisinopril", "Ibuprofen", "Aspirin",
+            "Tylenol", "Advil", "Lipitor", "Zoloft", "Prozac", "Xanax",
+            "Adderall", "Synthroid", "Levothyroxine", "Omeprazole", "Prilosec",
+            "Zantac", "Benadryl", "Claritin", "Zyrtec", "Mucinex", "Sudafed",
+            "Insulin", "Metoprolol", "Amlodipine", "Simvastatin", "Atorvastatin",
+            "Hydrochlorothiazide", "Losartan", "Gabapentin", "Tramadol", "Oxycodone",
+            "Morphine", "Codeine", "Prednisone", "Albuterol", "Fluticasone",
+            "Montelukast", "Warfarin", "Apixaban", "Clopidogrel", "Furosemide",
+            "Acetaminophen", "Naproxen", "Diclofenac", "Celecoxib", "Meloxicam",
+            "Hydroxyzine", "Loratadine", "Cetirizine", "Fexofenadine", "Diphenhydramine"
+        ]
+        
+        DispatchQueue.main.async {
+            drugNames = Set(fallbackMeds)
+            buildSearchIndex()
             isLoaded = true
-            
-            print("Successfully loaded \(drugNames.count) unique drug names")
-            print("Sample drugs: \(Array(drugNames).prefix(5))")
-        } catch {
-            print("Error reading CSV: \(error)")
-            print("Error loading drug names: \(error)")
+            print("Loaded \(fallbackMeds.count) fallback medications for immediate use")
         }
     }
     
@@ -94,39 +258,114 @@ class NDCDatabaseProcessor {
         
         return processed
     }
-
-    static func fuzzySearchDrugNames(matching searchText: String) -> [DrugSearchResult] {
-        print("Searching for: \(searchText)")
-        print("Database loaded: \(isLoaded)")
-        print("Total unique drugs in database: \(drugNames.count)")
-        
-        let searchText = searchText.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
-        
-        guard !searchText.isEmpty else { return [] }
+    
+    private static func searchFallbackMedications(for searchText: String) -> [DrugSearchResult] {
+        let fallbackMeds = [
+            "Amoxicillin", "Metformin", "Lisinopril", "Ibuprofen", "Aspirin",
+            "Tylenol", "Advil", "Lipitor", "Zoloft", "Prozac", "Xanax",
+            "Adderall", "Synthroid", "Levothyroxine", "Omeprazole", "Prilosec"
+        ]
         
         var results: [DrugSearchResult] = []
-        let processedSearch = processDrugName(searchText).lowercased()
         
-        for drug in drugNames {
-            let processedDrug = drug.lowercased()
-            
-            // Calculate match score
-            let score = calculateMatchScore(searchText: processedSearch, drugName: processedDrug)
-            
-            if score > 0.2 {
-                results.append(DrugSearchResult(
-                    name: drug,  // Use original name for display
-                    score: score
-                ))
+        for med in fallbackMeds {
+            let score = calculateMatchScore(searchText: searchText, drugName: med.lowercased())
+            if score > 0.3 {
+                results.append(DrugSearchResult(name: med, score: score))
             }
         }
         
-        // Sort by score and remove duplicates
         results.sort { $0.score > $1.score }
+        return Array(results.prefix(10))
+    }
+    
+    private static func buildSearchIndex() {
+        searchIndex.removeAll()
         
-        // Debug print results
-        print("Found \(results.count) unique matches")
-        results.prefix(5).forEach { print("Match: \($0.name) - Score: \($0.score)") }
+        for drug in drugNames {
+            let normalized = drug.lowercased()
+            
+            // Create prefixes of different lengths (2-5 characters)
+            for prefixLength in 2...min(5, normalized.count) {
+                let prefix = String(normalized.prefix(prefixLength))
+                
+                if searchIndex[prefix] == nil {
+                    searchIndex[prefix] = []
+                }
+                searchIndex[prefix]?.append(drug)
+            }
+        }
+        
+        print("Search index built with \(searchIndex.keys.count) prefixes")
+    }
+
+    static func fuzzySearchDrugNames(matching searchText: String) -> [DrugSearchResult] {
+        let normalizedSearch = searchText.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        guard !normalizedSearch.isEmpty else { return [] }
+        
+        // If still loading, search fallback medications only
+        if isLoading && !isLoaded {
+            return searchFallbackMedications(for: normalizedSearch)
+        }
+        
+        // Check cache first
+        if let cachedResults = searchCache[normalizedSearch] {
+            print("Returning cached results for '\(searchText)': \(cachedResults.count) matches")
+            return cachedResults
+        }
+        
+        var candidateDrugs: Set<String> = []
+        
+        // Use prefix-based search index for initial filtering
+        let searchPrefix = String(normalizedSearch.prefix(min(3, normalizedSearch.count)))
+        
+        if let indexedDrugs = searchIndex[searchPrefix] {
+            candidateDrugs.formUnion(indexedDrugs)
+            print("Index lookup for '\(searchPrefix)' found \(indexedDrugs.count) candidates")
+        }
+        
+        // If prefix search didn't find enough candidates, expand search
+        if candidateDrugs.count < 20 {
+            for (prefix, drugs) in searchIndex {
+                if prefix.contains(searchPrefix) || normalizedSearch.contains(prefix) {
+                    candidateDrugs.formUnion(drugs)
+                }
+            }
+        }
+        
+        // If still not enough candidates, fall back to full search
+        if candidateDrugs.isEmpty {
+            candidateDrugs = drugNames
+        }
+        
+        var results: [DrugSearchResult] = []
+        
+        // Score candidates
+        for drug in candidateDrugs {
+            let processedDrug = drug.lowercased()
+            let score = calculateMatchScore(searchText: normalizedSearch, drugName: processedDrug)
+            
+            if score > 0.25 {  // Slightly higher threshold for better results
+                results.append(DrugSearchResult(name: drug, score: score))
+            }
+        }
+        
+        // Sort by score descending and limit results
+        results.sort { $0.score > $1.score }
+        results = Array(results.prefix(50))  // Limit to top 50 results
+        
+        // Cache results (with size limit)
+        if searchCache.count >= cacheLimit {
+            // Remove oldest entries
+            let keysToRemove = Array(searchCache.keys).prefix(cacheLimit / 2)
+            for key in keysToRemove {
+                searchCache.removeValue(forKey: key)
+            }
+        }
+        searchCache[normalizedSearch] = results
+        
+        print("Search for '\(searchText)' found \(results.count) matches from \(candidateDrugs.count) candidates")
         
         return results
     }

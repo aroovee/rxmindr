@@ -1,0 +1,168 @@
+{
+  "source": "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/MedboxPrescriptionManager/MedicationCalendarView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Medication Calendar",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 56
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld%% adherence this month",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 93
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 232
+        }
+      },
+      {
+        "comment": "",
+        "key": "Adherence Legend",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 298
+        }
+      },
+      {
+        "comment": "",
+        "key": "No data available for this month",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 380
+        }
+      },
+      {
+        "comment": "",
+        "key": "Monthly Statistics",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 351
+        }
+      },
+      {
+        "comment": "",
+        "key": "Day Details",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 469
+        }
+      },
+      {
+        "comment": "",
+        "key": "Done",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 473
+        }
+      },
+      {
+        "comment": "",
+        "key": "No medications scheduled",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 533
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 506
+        }
+      },
+      {
+        "comment": "",
+        "key": "Taken",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 509
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 515
+        }
+      },
+      {
+        "comment": "",
+        "key": "Scheduled",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 518
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld%%",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 524
+        }
+      },
+      {
+        "comment": "",
+        "key": "Adherence",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 527
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld%%",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 571
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld of %lld doses taken",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 564
+        }
+      },
+      {
+        "comment": "",
+        "key": "Taken at:",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 578
+        }
+      },
+      {
+        "comment": "",
+        "key": "No medications scheduled",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 627
+        }
+      },
+      {
+        "comment": "",
+        "key": "You didn't have any medications to take on this day.",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 631
+        }
+      }
+    ]
+  },
+  "version": 1
+}

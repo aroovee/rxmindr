@@ -99,11 +99,11 @@ class PrescriptionScannerViewController: UIViewController, VNDocumentCameraViewC
         
         let image = scan.imageOfPage(at: 0)
         controller.dismiss(animated: true) { [weak self] in
-            self?.processImage(image)
+            self?.processSelectedImage(image)
         }
     }
     
-    private func processImage(_ image: UIImage) {
+    func processSelectedImage(_ image: UIImage) {
         print("Processing image")
         guard let cgImage = image.cgImage else {
             print("Failed to get CGImage from UIImage")

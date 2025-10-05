@@ -1,0 +1,160 @@
+{
+  "source": "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/MedboxPrescriptionManager/PrescriptionListView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "My Medications",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 76
+        }
+      },
+      {
+        "comment": "",
+        "key": "Search medications...",
+        "location": {
+          "startingColumn": 27,
+          "startingLine": 149
+        }
+      },
+      {
+        "comment": "",
+        "key": "Show Overdue Only",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 174
+        }
+      },
+      {
+        "comment": "",
+        "key": "Delete Medication",
+        "location": {
+          "startingColumn": 16,
+          "startingLine": 295
+        }
+      },
+      {
+        "comment": "",
+        "key": "Last taken: %@",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 248
+        }
+      },
+      {
+        "comment": "",
+        "key": "•",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 238
+        }
+      },
+      {
+        "comment": "",
+        "key": "Mark as Taken",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 265
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cancel",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 296
+        }
+      },
+      {
+        "comment": "",
+        "key": "Delete",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 297
+        }
+      },
+      {
+        "comment": "",
+        "key": "Are you sure you want to delete %@?",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 301
+        }
+      },
+      {
+        "comment": "",
+        "key": "No medications found",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 363
+        }
+      },
+      {
+        "comment": "",
+        "key": "No results for '%@'",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 367
+        }
+      },
+      {
+        "comment": "",
+        "key": "All caught up!",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 372
+        }
+      },
+      {
+        "comment": "",
+        "key": "No overdue medications found",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 376
+        }
+      },
+      {
+        "comment": "",
+        "key": "Start your journey",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 381
+        }
+      },
+      {
+        "comment": "",
+        "key": "Add your first medication to begin tracking your health",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 385
+        }
+      },
+      {
+        "comment": "",
+        "key": "Get started by:",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 394
+        }
+      },
+      {
+        "comment": "",
+        "key": "Adding a new prescription",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 402
+        }
+      },
+      {
+        "comment": "",
+        "key": "Scanning a prescription label",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 410
+        }
+      }
+    ]
+  },
+  "version": 1
+}

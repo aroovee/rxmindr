@@ -11,26 +11,26 @@ struct ContentView: View {
     @StateObject var viewRouter: ViewRouter
         
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             switch viewRouter.currentPage {
             case .onboarding:
-                
+                OnboardingView()
+                    .environmentObject(OnboardingStateManager())
             case .main:
                 MainTabView()
-                    .environmentObject
+                    .environmentObject(OnboardingStateManager())
             case .prescription:
-                PrescriptionListView(prescriptionStore: <#T##PrescriptionStore#>)
-                    .environmentObject
+                PrescriptionListView(prescriptionStore: PrescriptionStore.shared)
+                    .environmentObject(OnboardingStateManager())
             case .settings:
                 SettingsView()
-                    .environmentObject
+                    .environmentObject(OnboardingStateManager())
             case .search:
-                SearchView()
-                    .environmentObject
-                
+                SearchView(prescriptionStore: PrescriptionStore.shared)
+                    .environmentObject(OnboardingStateManager())
             }
         }
-        .padding()
+        .ignoresSafeArea(.keyboard)
     }
 }
 

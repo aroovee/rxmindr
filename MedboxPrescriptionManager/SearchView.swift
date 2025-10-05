@@ -6,8 +6,9 @@ struct SearchView: View {
     @State private var searchResults: [DrugSearchResult] = []
     @State private var isLoading = false
     @State private var debugMessage = ""
+    @State private var searchTask: Task<Void, Never>?
     
-    let commonMedications = ["Amoxicillin", "Metformin", "Lisinopril", "Ibuprofen"]
+    let commonMedications = ["Amoxicillin", "Metformin", "Lisinopril", "Ibuprofen", "Aspirin", "Tylenol", "Advil", "Lipitor"]
     
     var body: some View {
         NavigationView {
@@ -52,7 +53,7 @@ struct SearchView: View {
                         VStack(spacing: 10) {
                             Text("No medications found")
                                 .font(.headline)
-                            Text("Try a different search term")
+                            Text("Try different keywords")
                                 .font(.subheadline)
                                 .foregroundColor(.gray)
                         }
@@ -115,19 +116,43 @@ struct SearchView: View {
     }
     
     private func performSearch(query: String) {
+        // Cancel any existing search task
+        searchTask?.cancel()
+        
         guard !query.isEmpty else {
             searchResults = []
+            isLoading = false
             return
         }
         
-        isLoading = true
+        // Show loading state immediately for responsiveness
+        if !isLoading {
+            isLoading = true
+        }
         
-        // Debounce search
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-            let results = NDCDatabaseProcessor.fuzzySearchDrugNames(matching: query)
-            searchResults = results
-            debugMessage = "Found \(results.count) matches for '\(query)'"
-            isLoading = false
+        // Create new search task with proper debouncing
+        searchTask = Task {
+            // Wait for debounce period
+            try? await Task.sleep(nanoseconds: 300_000_000) // 300ms debounce
+            
+            // Check if task was cancelled
+            if Task.isCancelled {
+                return
+            }
+            
+            // Perform search in background
+            let results = await Task.detached(priority: .userInitiated) {
+                return NDCDatabaseProcessor.fuzzySearchDrugNames(matching: query)
+            }.value
+            
+            // Update UI on main thread
+            await MainActor.run {
+                if !Task.isCancelled {
+                    self.searchResults = results
+                    self.debugMessage = "Found \(results.count) matches for '\(query)'"
+                    self.isLoading = false
+                }
+            }
         }
     }
 }

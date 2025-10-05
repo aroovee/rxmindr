@@ -1,0 +1,180 @@
+{
+  "" : {
+    "const-values" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/Rxmindr-master.swiftconstvalues",
+    "dependencies" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/Rxmindr-master.d",
+    "diagnostics" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/Rxmindr-master.dia",
+    "emit-module-dependencies" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/Rxmindr-master-emit-module.d",
+    "emit-module-diagnostics" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/Rxmindr-master-emit-module.dia",
+    "swift-dependencies" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/Rxmindr-master.swiftdeps"
+  },
+  "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/MedboxPrescriptionManager/AddPrescriptionView.swift" : {
+    "index-unit-output-path" : "/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/AddPrescriptionView.o",
+    "llvm-bc" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/AddPrescriptionView.bc",
+    "object" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/AddPrescriptionView.o"
+  },
+  "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/MedboxPrescriptionManager/ContentView.swift" : {
+    "index-unit-output-path" : "/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/ContentView.o",
+    "llvm-bc" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/ContentView.bc",
+    "object" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/ContentView.o"
+  },
+  "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/MedboxPrescriptionManager/CoverScreen.swift" : {
+    "index-unit-output-path" : "/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/CoverScreen.o",
+    "llvm-bc" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/CoverScreen.bc",
+    "object" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/CoverScreen.o"
+  },
+  "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/MedboxPrescriptionManager/DrugDetailView.swift" : {
+    "index-unit-output-path" : "/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/DrugDetailView.o",
+    "llvm-bc" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/DrugDetailView.bc",
+    "object" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/DrugDetailView.o"
+  },
+  "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/MedboxPrescriptionManager/DrugInfoService.swift" : {
+    "index-unit-output-path" : "/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/DrugInfoService.o",
+    "llvm-bc" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/DrugInfoService.bc",
+    "object" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/DrugInfoService.o"
+  },
+  "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/MedboxPrescriptionManager/Interaction.swift" : {
+    "index-unit-output-path" : "/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/Interaction.o",
+    "llvm-bc" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/Interaction.bc",
+    "object" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/Interaction.o"
+  },
+  "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/MedboxPrescriptionManager/InteractionView.swift" : {
+    "index-unit-output-path" : "/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/InteractionView.o",
+    "llvm-bc" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/InteractionView.bc",
+    "object" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/InteractionView.o"
+  },
+  "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/MedboxPrescriptionManager/MainTabView.swift" : {
+    "index-unit-output-path" : "/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/MainTabView.o",
+    "llvm-bc" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/MainTabView.bc",
+    "object" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/MainTabView.o"
+  },
+  "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/MedboxPrescriptionManager/MedboxPrescriptionManagerApp.swift" : {
+    "index-unit-output-path" : "/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/MedboxPrescriptionManagerApp.o",
+    "llvm-bc" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/MedboxPrescriptionManagerApp.bc",
+    "object" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/MedboxPrescriptionManagerApp.o"
+  },
+  "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/MedboxPrescriptionManager/MedicationCalendarView.swift" : {
+    "index-unit-output-path" : "/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/MedicationCalendarView.o",
+    "llvm-bc" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/MedicationCalendarView.bc",
+    "object" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/MedicationCalendarView.o"
+  },
+  "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/MedboxPrescriptionManager/MedicationRecord.swift" : {
+    "index-unit-output-path" : "/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/MedicationRecord.o",
+    "llvm-bc" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/MedicationRecord.bc",
+    "object" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/MedicationRecord.o"
+  },
+  "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/MedboxPrescriptionManager/MedicineLabelScannerViewController.swift" : {
+    "index-unit-output-path" : "/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/MedicineLabelScannerViewController.o",
+    "llvm-bc" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/MedicineLabelScannerViewController.bc",
+    "object" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/MedicineLabelScannerViewController.o"
+  },
+  "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/MedboxPrescriptionManager/NDCDatabaseProcessor.swift" : {
+    "index-unit-output-path" : "/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/NDCDatabaseProcessor.o",
+    "llvm-bc" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/NDCDatabaseProcessor.bc",
+    "object" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/NDCDatabaseProcessor.o"
+  },
+  "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/MedboxPrescriptionManager/NotificationManager.swift" : {
+    "index-unit-output-path" : "/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/NotificationManager.o",
+    "llvm-bc" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/NotificationManager.bc",
+    "object" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/NotificationManager.o"
+  },
+  "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/MedboxPrescriptionManager/OnboardingManager.swift" : {
+    "index-unit-output-path" : "/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/OnboardingManager.o",
+    "llvm-bc" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/OnboardingManager.bc",
+    "object" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/OnboardingManager.o"
+  },
+  "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/MedboxPrescriptionManager/OnboardingPage.swift" : {
+    "index-unit-output-path" : "/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/OnboardingPage.o",
+    "llvm-bc" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/OnboardingPage.bc",
+    "object" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/OnboardingPage.o"
+  },
+  "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/MedboxPrescriptionManager/OnboardingView.swift" : {
+    "index-unit-output-path" : "/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/OnboardingView.o",
+    "llvm-bc" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/OnboardingView.bc",
+    "object" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/OnboardingView.o"
+  },
+  "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/MedboxPrescriptionManager/Prescription.swift" : {
+    "index-unit-output-path" : "/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/Prescription.o",
+    "llvm-bc" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/Prescription.bc",
+    "object" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/Prescription.o"
+  },
+  "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/MedboxPrescriptionManager/PrescriptionDetailView.swift" : {
+    "index-unit-output-path" : "/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/PrescriptionDetailView.o",
+    "llvm-bc" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/PrescriptionDetailView.bc",
+    "object" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/PrescriptionDetailView.o"
+  },
+  "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/MedboxPrescriptionManager/PrescriptionListView.swift" : {
+    "index-unit-output-path" : "/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/PrescriptionListView.o",
+    "llvm-bc" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/PrescriptionListView.bc",
+    "object" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/PrescriptionListView.o"
+  },
+  "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/MedboxPrescriptionManager/PrescriptionStore.swift" : {
+    "index-unit-output-path" : "/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/PrescriptionStore.o",
+    "llvm-bc" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/PrescriptionStore.bc",
+    "object" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/PrescriptionStore.o"
+  },
+  "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/MedboxPrescriptionManager/ScanView.swift" : {
+    "index-unit-output-path" : "/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/ScanView.o",
+    "llvm-bc" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/ScanView.bc",
+    "object" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/ScanView.o"
+  },
+  "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/MedboxPrescriptionManager/ScannerCoordinator.swift" : {
+    "index-unit-output-path" : "/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/ScannerCoordinator.o",
+    "llvm-bc" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/ScannerCoordinator.bc",
+    "object" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/ScannerCoordinator.o"
+  },
+  "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/MedboxPrescriptionManager/SearchView.swift" : {
+    "index-unit-output-path" : "/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/SearchView.o",
+    "llvm-bc" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/SearchView.bc",
+    "object" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/SearchView.o"
+  },
+  "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/MedboxPrescriptionManager/SettingsView.swift" : {
+    "index-unit-output-path" : "/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/SettingsView.o",
+    "llvm-bc" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/SettingsView.bc",
+    "object" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/SettingsView.o"
+  },
+  "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/MedboxPrescriptionManager/Streak.swift" : {
+    "index-unit-output-path" : "/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/Streak.o",
+    "llvm-bc" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/Streak.bc",
+    "object" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/Streak.o"
+  },
+  "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/MedboxPrescriptionManager/StreakView.swift" : {
+    "index-unit-output-path" : "/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/StreakView.o",
+    "llvm-bc" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/StreakView.bc",
+    "object" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/StreakView.o"
+  },
+  "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/MedboxPrescriptionManager/SwiftUIView.swift" : {
+    "index-unit-output-path" : "/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/SwiftUIView.o",
+    "llvm-bc" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/SwiftUIView.bc",
+    "object" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/SwiftUIView.o"
+  },
+  "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/MedboxPrescriptionManager/Symptom.swift" : {
+    "index-unit-output-path" : "/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/Symptom.o",
+    "llvm-bc" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/Symptom.bc",
+    "object" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/Symptom.o"
+  },
+  "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/MedboxPrescriptionManager/SymptomMatcherView.swift" : {
+    "index-unit-output-path" : "/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/SymptomMatcherView.o",
+    "llvm-bc" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/SymptomMatcherView.bc",
+    "object" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/SymptomMatcherView.o"
+  },
+  "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/MedboxPrescriptionManager/SymptomTrackingView.swift" : {
+    "index-unit-output-path" : "/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/SymptomTrackingView.o",
+    "llvm-bc" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/SymptomTrackingView.bc",
+    "object" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/SymptomTrackingView.o"
+  },
+  "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/MedboxPrescriptionManager/ViewRouter.swift" : {
+    "index-unit-output-path" : "/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/ViewRouter.o",
+    "llvm-bc" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/ViewRouter.bc",
+    "object" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/ViewRouter.o"
+  },
+  "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/MedboxPrescriptionManager/walkthroughController.swift" : {
+    "index-unit-output-path" : "/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/walkthroughController.o",
+    "llvm-bc" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/walkthroughController.bc",
+    "object" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/walkthroughController.o"
+  },
+  "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/DerivedSources/GeneratedAssetSymbols.swift" : {
+    "index-unit-output-path" : "/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/GeneratedAssetSymbols.o",
+    "llvm-bc" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/GeneratedAssetSymbols.bc",
+    "object" : "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/build/Rxmindr.build/Release-iphoneos/Rxmindr.build/Objects-normal/arm64/GeneratedAssetSymbols.o"
+  }
+}

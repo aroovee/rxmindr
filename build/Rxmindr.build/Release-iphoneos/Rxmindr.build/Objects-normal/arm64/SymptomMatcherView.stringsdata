@@ -1,0 +1,56 @@
+{
+  "source": "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/MedboxPrescriptionManager/SymptomMatcherView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Symptom Matcher",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 73
+        }
+      },
+      {
+        "comment": "",
+        "key": "Start Over",
+        "location": {
+          "startingColumn": 51,
+          "startingLine": 61
+        }
+      },
+      {
+        "comment": "",
+        "key": "Analyze Symptoms",
+        "location": {
+          "startingColumn": 66,
+          "startingLine": 61
+        }
+      },
+      {
+        "comment": "",
+        "key": "Select your symptoms:",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 107
+        }
+      },
+      {
+        "comment": "",
+        "key": "Possible side effects:",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 190
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld%% match",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 185
+        }
+      }
+    ]
+  },
+  "version": 1
+}

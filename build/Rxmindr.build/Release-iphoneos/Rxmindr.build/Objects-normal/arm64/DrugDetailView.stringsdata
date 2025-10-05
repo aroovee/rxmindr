@@ -1,0 +1,56 @@
+{
+  "source": "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/MedboxPrescriptionManager/DrugDetailView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Drug Information",
+        "location": {
+          "startingColumn": 29,
+          "startingLine": 103
+        }
+      },
+      {
+        "comment": "",
+        "key": "Loading drug information...",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 16
+        }
+      },
+      {
+        "comment": "",
+        "key": "Common Uses",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 35
+        }
+      },
+      {
+        "comment": "",
+        "key": "Side Effects",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 54
+        }
+      },
+      {
+        "comment": "",
+        "key": "Important Warnings",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 74
+        }
+      },
+      {
+        "comment": "",
+        "key": "Add Prescription",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 90
+        }
+      }
+    ]
+  },
+  "version": 1
+}

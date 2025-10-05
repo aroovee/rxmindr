@@ -4,7 +4,6 @@ struct CoverScreen: View {
     @State private var isStarted = false
     @State private var logoScale: CGFloat = 0.8
     @State private var textOpacity: Double = 0
-    @State private var buttonOpacity: Double = 0
     
     var body: some View {
         if isStarted {
@@ -12,7 +11,7 @@ struct CoverScreen: View {
         } else {
             ZStack {
                 // Background - fixed the color initialization
-                Color(.systemBackground)
+                DesignSystem.Colors.background
                     .edgesIgnoringSafeArea(.all)
                 
                 VStack(spacing: 30) {
@@ -22,57 +21,47 @@ struct CoverScreen: View {
                         ZStack {
                             // Pill shape
                             Capsule()
-                                .fill(Color.blue.opacity(0.2))
+                                .fill(DesignSystem.Colors.primary.opacity(0.2))
                                 .frame(width: 100, height: 200)
                             
                             // Line in middle
                             Rectangle()
-                                .fill(Color.blue.opacity(0.2))
+                                .fill(DesignSystem.Colors.primary.opacity(0.2))
                                 .frame(width: 100, height: 2)
                             
                             // Rx symbol
                             Text("℞")
                                 .font(.system(size: 60))
-                                .foregroundColor(.blue)
+                                .foregroundColor(DesignSystem.Colors.primary)
                         }
                         .scaleEffect(logoScale)
                         .animation(.spring(response: 0.5, dampingFraction: 0.6), value: logoScale)
                         
                         // App Name
                         Text("Rxmindr")
-                            .font(.system(size: 48, weight: .bold, design: .rounded))
-                            .foregroundColor(.blue)
+                            .font(DesignSystem.Typography.brandName())
+                            .foregroundColor(DesignSystem.Colors.primary)
                             .opacity(textOpacity)
+                            .shadow(color: DesignSystem.Colors.primary.opacity(0.3), radius: 8, x: 0, y: 4)
                     }
-                    
-                    // Start Button
-                    Button(action: {
-                        withAnimation {
-                            isStarted = true
-                        }
-                    }) {
-                        Text("Get Started")
-                            .font(.title3.weight(.semibold))
-                            .foregroundColor(.white)
-                            .frame(width: 200, height: 50)
-                            .background(Color.blue)
-                            .cornerRadius(25)
-                            .shadow(radius: 5)
-                    }
-                    .opacity(buttonOpacity)
                 }
             }
             .onAppear {
+                // Start logo animation
                 withAnimation(.easeOut(duration: 0.8)) {
                     logoScale = 1.0
                 }
                 
+                // Show app name
                 withAnimation(.easeIn(duration: 0.8).delay(0.4)) {
                     textOpacity = 1.0
                 }
                 
-                withAnimation(.easeIn(duration: 0.8).delay(0.8)) {
-                    buttonOpacity = 1.0
+                // Automatically transition to main app after animation completes
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+                    withAnimation(.easeInOut(duration: 0.5)) {
+                        isStarted = true
+                    }
                 }
             }
         }

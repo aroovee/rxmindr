@@ -1,0 +1,192 @@
+{
+  "source": "/Users/arooveenandakumar/Documents/MedboxPrescriptionManager/MedboxPrescriptionManager/PrescriptionDetailView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Taken",
+        "location": {
+          "startingColumn": 49,
+          "startingLine": 179
+        }
+      },
+      {
+        "comment": "",
+        "key": "Pending",
+        "location": {
+          "startingColumn": 59,
+          "startingLine": 179
+        }
+      },
+      {
+        "comment": "",
+        "key": "This medication has potential conflicts",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 189
+        }
+      },
+      {
+        "comment": "",
+        "key": "Details",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 215
+        }
+      },
+      {
+        "comment": "",
+        "key": "Method",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 230
+        }
+      },
+      {
+        "comment": "",
+        "key": "Method",
+        "location": {
+          "startingColumn": 32,
+          "startingLine": 234
+        }
+      },
+      {
+        "comment": "",
+        "key": "Schedule",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 285
+        }
+      },
+      {
+        "comment": "",
+        "key": "Start Date",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 296
+        }
+      },
+      {
+        "comment": "",
+        "key": "",
+        "location": {
+          "startingColumn": 36,
+          "startingLine": 300
+        }
+      },
+      {
+        "comment": "",
+        "key": "End Date",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 315
+        }
+      },
+      {
+        "comment": "",
+        "key": "",
+        "location": {
+          "startingColumn": 40,
+          "startingLine": 319
+        }
+      },
+      {
+        "comment": "",
+        "key": "Daily Reminders",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 350
+        }
+      },
+      {
+        "comment": "",
+        "key": "Number of reminders",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 361
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld",
+        "location": {
+          "startingColumn": 33,
+          "startingLine": 365
+        }
+      },
+      {
+        "comment": "",
+        "key": "",
+        "location": {
+          "startingColumn": 32,
+          "startingLine": 394
+        }
+      },
+      {
+        "comment": "",
+        "key": "Reminder %lld",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 380
+        }
+      },
+      {
+        "comment": "",
+        "key": "",
+        "location": {
+          "startingColumn": 33,
+          "startingLine": 385
+        }
+      },
+      {
+        "comment": "",
+        "key": "Status",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 416
+        }
+      },
+      {
+        "comment": "",
+        "key": "Taken Today",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 426
+        }
+      },
+      {
+        "comment": "",
+        "key": "Last taken: %@",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 436
+        }
+      },
+      {
+        "comment": "",
+        "key": "Notes",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 459
+        }
+      },
+      {
+        "comment": "",
+        "key": "Save Changes",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 503
+        }
+      },
+      {
+        "comment": "",
+        "key": "Share Status",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 493
+        }
+      }
+    ]
+  },
+  "version": 1
+}

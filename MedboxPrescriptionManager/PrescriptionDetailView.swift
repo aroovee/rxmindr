@@ -5,6 +5,9 @@ struct PrescriptionDetailView: View {
     @Binding var prescription: Prescription
     @State private var showingShareSheet = false
     @State private var dailyFrequency: Int
+    @State private var prescriptionNotes: String = "Enter prescription notes"
+    @State private var selectedMethod: String = "Injection"
+    var methods: [String] = ["Injection", "Tablet", "Liquid", "IV", "Rectal"]
     
     init(prescriptionStore: PrescriptionStore, prescription: Binding<Prescription>) {
         self.prescriptionStore = prescriptionStore
@@ -13,69 +16,51 @@ struct PrescriptionDetailView: View {
     }
     
     var body: some View {
-        Form {
-            Section(header: Text("Details")) {
-                TextField("Name", text: $prescription.name)
-                TextField("Dose", text: $prescription.dose)
-                TextField("Frequency", text: $prescription.frequency)
-            }
-            
-            Section(header: Text("Dates")) {
-                DatePicker("Start Date", selection: $prescription.startDate, displayedComponents: .date)
-                if let endDate = prescription.endDate {
-                    DatePicker("End Date", selection: Binding(
-                        get: { endDate },
-                        set: { prescription.endDate = $0 }
-                    ), displayedComponents: .date)
-                }
-            }
-            
-            Section(header: Text("Daily Reminders")) {
-                Stepper("Number of reminders: \(dailyFrequency)", value: $dailyFrequency, in: 1...4)
-                    .onChange(of: dailyFrequency) { newValue in
-                        updateReminderTimes(count: newValue)
-                    }
+        ScrollView {
+            LazyVStack(spacing: 20) {
+                MedicationHeaderCard(prescription: prescription)
                 
-                ForEach(Array(prescription.reminderTimes.enumerated()), id: \.element.id) { index, reminder in
-                    HStack {
-                        DatePicker(
-                            "Reminder \(index + 1)",
-                            selection: reminderTimeBinding(for: index),
-                            displayedComponents: .hourAndMinute
-                        )
-                        
-                        Spacer()
-                        
-                        Toggle("", isOn: reminderEnabledBinding(for: index))
-                            .labelsHidden()
-                    }
-                }
-            }
-            
-            Section(header: Text("Status")) {
-                Toggle("Taken", isOn: $prescription.isTaken)
-                if let lastTaken = prescription.lastTaken {
-                    Text("Last taken: \(formatDate(lastTaken))")
-                }
-            }
-            
-            Section {
-                Button(action: {
-                    showingShareSheet = true
-                }) {
-                    HStack {
-                        Image(systemName: "square.and.arrow.up")
-                        Text("Share Status")
-                    }
-                }
+                MedicationDetailsCard(
+                    prescription: $prescription,
+                    selectedMethod: $selectedMethod,
+                    methods: methods
+                )
                 
-                Button("Save Changes") {
-                    prescriptionStore.updatePrescription(prescription)
-                    NotificationManager.shared.updateNotifications(for: prescription)
-                }
+                DateSettingsCard(prescription: $prescription)
+                
+                RemindersCard(
+                    prescription: $prescription,
+                    dailyFrequency: $dailyFrequency,
+                    updateReminderTimes: updateReminderTimes,
+                    reminderTimeBinding: reminderTimeBinding,
+                    reminderEnabledBinding: reminderEnabledBinding
+                )
+                
+                StatusCard(
+                    prescription: $prescription,
+                    formatDate: formatDate
+                )
+                
+                NotesCard(prescriptionNotes: $prescriptionNotes)
+                
+                ActionsCard(
+                    showingShareSheet: $showingShareSheet,
+                    prescriptionStore: prescriptionStore,
+                    prescription: prescription
+                )
             }
+            .padding()
         }
-        .navigationBarTitle(prescription.name)
+        .navigationTitle(prescription.name)
+        .navigationBarTitleDisplayMode(.large)
+        .background(
+            LinearGradient(
+                gradient: Gradient(colors: [Color.blue.opacity(0.05), Color.mint.opacity(0.05)]),
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+            .ignoresSafeArea()
+        )
         .sheet(isPresented: $showingShareSheet) {
             ShareSheet(activityItems: [generateSharingText()])
         }
@@ -85,7 +70,6 @@ struct PrescriptionDetailView: View {
         var updatedTimes = prescription.reminderTimes
         
         if count > updatedTimes.count {
-            // Add new reminder times
             let hoursSpacing = 24 / count
             while updatedTimes.count < count {
                 let nextTime = Calendar.current.date(
@@ -97,7 +81,6 @@ struct PrescriptionDetailView: View {
                 updatedTimes.append(Prescription.ReminderTime(time: nextTime))
             }
         } else {
-            // Remove excess reminder times
             updatedTimes = Array(updatedTimes.prefix(count))
         }
         
@@ -106,8 +89,12 @@ struct PrescriptionDetailView: View {
     
     private func reminderTimeBinding(for index: Int) -> Binding<Date> {
         Binding(
-            get: { prescription.reminderTimes[index].time },
+            get: { 
+                guard index < prescription.reminderTimes.count else { return Date() }
+                return prescription.reminderTimes[index].time 
+            },
             set: { newTime in
+                guard index < prescription.reminderTimes.count else { return }
                 var updatedTimes = prescription.reminderTimes
                 updatedTimes[index].time = newTime
                 prescription.reminderTimes = updatedTimes
@@ -117,8 +104,12 @@ struct PrescriptionDetailView: View {
     
     private func reminderEnabledBinding(for index: Int) -> Binding<Bool> {
         Binding(
-            get: { prescription.reminderTimes[index].isEnabled },
+            get: { 
+                guard index < prescription.reminderTimes.count else { return true }
+                return prescription.reminderTimes[index].isEnabled 
+            },
             set: { newValue in
+                guard index < prescription.reminderTimes.count else { return }
                 var updatedTimes = prescription.reminderTimes
                 updatedTimes[index].isEnabled = newValue
                 prescription.reminderTimes = updatedTimes
@@ -166,12 +157,377 @@ struct PrescriptionDetailView: View {
         let conflicts = prescription.conflicts
         text += "\nConflicts: \(conflicts)"
         
-        
         return text
     }
 }
 
-// ShareSheet wrapper remains the same
+struct MedicationHeaderCard: View {
+    let prescription: Prescription
+    
+    var body: some View {
+        VStack(spacing: 12) {
+            HStack {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(prescription.name)
+                        .font(DesignSystem.Typography.titleLarge(weight: .bold, family: .avenir))
+                        .foregroundColor(.primary)
+                    
+                    Text(prescription.dose)
+                        .font(DesignSystem.Typography.bodyMedium(weight: .regular, family: .sfPro))
+                        .foregroundColor(.secondary)
+                }
+                
+                Spacer()
+                
+                VStack {
+                    Image(systemName: prescription.isTaken ? "checkmark.circle.fill" : "circle")
+                        .font(.title)
+                        .foregroundColor(prescription.isTaken ? .green : .gray)
+                    
+                    Text(prescription.isTaken ? "Taken" : "Pending")
+                        .font(DesignSystem.Typography.statusText())
+                        .foregroundColor(prescription.isTaken ? .green : .gray)
+                }
+            }
+            
+            if prescription.hasConflicts {
+                HStack {
+                    Image(systemName: "exclamationmark.triangle.fill")
+                        .foregroundColor(.red)
+                    Text("Potential conflicts")
+                        .font(.caption)
+                        .foregroundColor(.red)
+                }
+                .padding(.horizontal, 12)
+                .padding(.vertical, 6)
+                .background(Color.red.opacity(0.1))
+                .clipShape(RoundedRectangle(cornerRadius: 8))
+            }
+        }
+        .padding(20)
+        .background(
+            RoundedRectangle(cornerRadius: 16)
+                .fill(Color(.systemBackground))
+                .shadow(color: .black.opacity(0.1), radius: 10, x: 0, y: 5)
+        )
+    }
+}
+
+struct MedicationDetailsCard: View {
+    @Binding var prescription: Prescription
+    @Binding var selectedMethod: String
+    let methods: [String]
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            Text("Details")
+                .font(DesignSystem.Typography.headingMedium(weight: .semibold, family: .avenir))
+                .foregroundColor(.primary)
+            
+            VStack(spacing: 12) {
+                CustomTextField(title: "Name", text: $prescription.name, icon: "pills.fill")
+                CustomTextField(title: "Dose", text: $prescription.dose, icon: "scalemass.fill")
+                CustomTextField(title: "Frequency", text: $prescription.frequency, icon: "clock.fill")
+                
+                HStack {
+                    Image(systemName: "syringe.fill")
+                        .foregroundColor(.blue)
+                        .frame(width: 20)
+                    
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("Method")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                        
+                        Picker("Method", selection: $selectedMethod) {
+                            ForEach(methods, id: \.self) { method in
+                                Text(method)
+                            }
+                        }
+                        .pickerStyle(MenuPickerStyle())
+                    }
+                    
+                    Spacer()
+                }
+                .padding(.vertical, 8)
+            }
+        }
+        .padding(20)
+        .background(
+            RoundedRectangle(cornerRadius: 16)
+                .fill(Color(.systemBackground))
+                .shadow(color: .black.opacity(0.1), radius: 10, x: 0, y: 5)
+        )
+    }
+}
+
+struct CustomTextField: View {
+    let title: String
+    @Binding var text: String
+    let icon: String
+    
+    var body: some View {
+        HStack {
+            Image(systemName: icon)
+                .foregroundColor(.blue)
+                .frame(width: 20)
+            
+            VStack(alignment: .leading, spacing: 4) {
+                Text(title)
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                
+                TextField(title, text: $text)
+                    .font(.body)
+            }
+        }
+        .padding(.vertical, 8)
+    }
+}
+
+struct DateSettingsCard: View {
+    @Binding var prescription: Prescription
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            Text("Schedule")
+                .font(.headline)
+                .foregroundColor(.primary)
+            
+            VStack(spacing: 12) {
+                HStack {
+                    Image(systemName: "calendar")
+                        .foregroundColor(.green)
+                        .frame(width: 20)
+                    
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("Start Date")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                        
+                        DatePicker("", selection: $prescription.startDate, displayedComponents: .date)
+                            .labelsHidden()
+                    }
+                    
+                    Spacer()
+                }
+                .padding(.vertical, 8)
+                
+                if let endDate = prescription.endDate {
+                    HStack {
+                        Image(systemName: "calendar.badge.minus")
+                            .foregroundColor(.red)
+                            .frame(width: 20)
+                        
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text("End Date")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                            
+                            DatePicker("", selection: Binding(
+                                get: { endDate },
+                                set: { prescription.endDate = $0 }
+                            ), displayedComponents: .date)
+                            .labelsHidden()
+                        }
+                        
+                        Spacer()
+                    }
+                    .padding(.vertical, 8)
+                }
+            }
+        }
+        .padding(20)
+        .background(
+            RoundedRectangle(cornerRadius: 16)
+                .fill(Color(.systemBackground))
+                .shadow(color: .black.opacity(0.1), radius: 10, x: 0, y: 5)
+        )
+    }
+}
+
+struct RemindersCard: View {
+    @Binding var prescription: Prescription
+    @Binding var dailyFrequency: Int
+    let updateReminderTimes: (Int) -> Void
+    let reminderTimeBinding: (Int) -> Binding<Date>
+    let reminderEnabledBinding: (Int) -> Binding<Bool>
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            Text("Daily Reminders")
+                .font(.headline)
+                .foregroundColor(.primary)
+            
+            VStack(spacing: 12) {
+                HStack {
+                    Image(systemName: "bell.fill")
+                        .foregroundColor(.orange)
+                        .frame(width: 20)
+                    
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("Number of reminders")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                        
+                        Stepper("\(dailyFrequency)", value: $dailyFrequency, in: 1...4)
+                            .onChange(of: dailyFrequency) { newValue in
+                                updateReminderTimes(newValue)
+                            }
+                    }
+                }
+                .padding(.vertical, 8)
+                
+                ForEach(Array(prescription.reminderTimes.enumerated()), id: \.element.id) { index, reminder in
+                    HStack {
+                        Image(systemName: "clock.fill")
+                            .foregroundColor(.blue)
+                            .frame(width: 20)
+                        
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text("Reminder \(index + 1)")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                            
+                            DatePicker(
+                                "",
+                                selection: reminderTimeBinding(index),
+                                displayedComponents: .hourAndMinute
+                            )
+                            .labelsHidden()
+                        }
+                        
+                        Spacer()
+                        
+                        Toggle("", isOn: reminderEnabledBinding(index))
+                            .labelsHidden()
+                    }
+                    .padding(.vertical, 4)
+                }
+            }
+        }
+        .padding(20)
+        .background(
+            RoundedRectangle(cornerRadius: 16)
+                .fill(Color(.systemBackground))
+                .shadow(color: .black.opacity(0.1), radius: 10, x: 0, y: 5)
+        )
+    }
+}
+
+struct StatusCard: View {
+    @Binding var prescription: Prescription
+    let formatDate: (Date) -> String
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            Text("Status")
+                .font(.headline)
+                .foregroundColor(.primary)
+            
+            VStack(spacing: 12) {
+                HStack {
+                    Image(systemName: prescription.isTaken ? "checkmark.circle.fill" : "circle")
+                        .foregroundColor(prescription.isTaken ? .green : .gray)
+                        .frame(width: 20)
+                    
+                    Toggle("Taken Today", isOn: $prescription.isTaken)
+                        .font(.body)
+                }
+                
+                if let lastTaken = prescription.lastTaken {
+                    HStack {
+                        Image(systemName: "clock.arrow.circlepath")
+                            .foregroundColor(.blue)
+                            .frame(width: 20)
+                        
+                        Text("Last taken: \(formatDate(lastTaken))")
+                            .font(.body)
+                            .foregroundColor(.secondary)
+                        
+                        Spacer()
+                    }
+                }
+            }
+        }
+        .padding(20)
+        .background(
+            RoundedRectangle(cornerRadius: 16)
+                .fill(Color(.systemBackground))
+                .shadow(color: .black.opacity(0.1), radius: 10, x: 0, y: 5)
+        )
+    }
+}
+
+struct NotesCard: View {
+    @Binding var prescriptionNotes: String
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            Text("Notes")
+                .font(.headline)
+                .foregroundColor(.primary)
+            
+            TextEditor(text: $prescriptionNotes)
+                .frame(minHeight: 100)
+                .padding(12)
+                .background(
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(Color.gray.opacity(0.3), lineWidth: 1)
+                )
+        }
+        .padding(20)
+        .background(
+            RoundedRectangle(cornerRadius: 16)
+                .fill(Color(.systemBackground))
+                .shadow(color: .black.opacity(0.1), radius: 10, x: 0, y: 5)
+        )
+    }
+}
+
+struct ActionsCard: View {
+    @Binding var showingShareSheet: Bool
+    let prescriptionStore: PrescriptionStore
+    let prescription: Prescription
+    
+    var body: some View {
+        VStack(spacing: 12) {
+            Button(action: {
+                showingShareSheet = true
+            }) {
+                HStack {
+                    Image(systemName: "square.and.arrow.up")
+                        .font(.title3)
+                    Text("Share Status")
+                        .font(.body.weight(.medium))
+                }
+                .frame(maxWidth: .infinity)
+                .padding()
+                .background(Color.blue)
+                .foregroundColor(.white)
+                .clipShape(RoundedRectangle(cornerRadius: 12))
+            }
+            
+            Button("Save Changes") {
+                prescriptionStore.updatePrescription(prescription)
+                NotificationManager.shared.updateNotifications(for: prescription)
+            }
+            .frame(maxWidth: .infinity)
+            .padding()
+            .background(Color.green)
+            .foregroundColor(.white)
+            .font(.body.weight(.medium))
+            .clipShape(RoundedRectangle(cornerRadius: 12))
+        }
+        .padding(20)
+        .background(
+            RoundedRectangle(cornerRadius: 16)
+                .fill(Color(.systemBackground))
+                .shadow(color: .black.opacity(0.1), radius: 10, x: 0, y: 5)
+        )
+    }
+}
+
 struct ShareSheet: UIViewControllerRepresentable {
     let activityItems: [Any]
     
