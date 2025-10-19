@@ -1,49 +1,87 @@
 import SwiftUI
 
+// MARK: - Color Extension for Dark Mode Support
+extension Color {
+    init(light: Color, dark: Color) {
+        self.init(uiColor: UIColor(dynamicProvider: { traits in
+            switch traits.userInterfaceStyle {
+            case .dark:
+                return UIColor(dark)
+            default:
+                return UIColor(light)
+            }
+        }))
+    }
+}
+
 // MARK: - Design System
 struct DesignSystem {
     
-    // MARK: - Modern Color Palette (Contemporary Healthcare Theme)
+    // MARK: - Modern Color Palette (Contemporary Healthcare Theme with Dark Mode Support)
     struct Colors {
         // Primary Colors - Modern Medical Blues with Purple Accent
         static let primary = Color(red: 0.25, green: 0.45, blue: 1.0)           // Modern Medical Blue #4073FF
         static let primaryDark = Color(red: 0.18, green: 0.35, blue: 0.85)      // Deep Medical Blue #2D59D9
         static let primaryLight = Color(red: 0.92, green: 0.95, blue: 1.0)      // Ultra Light Blue #EBEFFF
-        
+
         // Secondary Colors - Sophisticated Purple Gradient
         static let secondary = Color(red: 0.45, green: 0.25, blue: 1.0)         // Medical Purple #7340FF
         static let secondaryDark = Color(red: 0.35, green: 0.18, blue: 0.85)    // Deep Purple #592DD9
         static let secondaryLight = Color(red: 0.95, green: 0.92, blue: 1.0)    // Ultra Light Purple #F2EBFF
-        
+
         // Accent Colors - Vibrant and Professional
         static let accent = Color(red: 0.0, green: 0.85, blue: 0.55)            // Modern Teal #00D98C
         static let accentDark = Color(red: 0.0, green: 0.75, blue: 0.45)        // Deep Teal #00BF73
         static let accentLight = Color(red: 0.90, green: 0.98, blue: 0.95)      // Ultra Light Teal #E6FAF2
-        
-        // Neutral Colors - Soft Grays
-        static let neutral100 = Color(red: 0.98, green: 0.98, blue: 0.98)       // Almost White #FAFAFA
-        static let neutral200 = Color(red: 0.95, green: 0.95, blue: 0.95)       // Very Light Gray #F2F2F2
-        static let neutral300 = Color(red: 0.88, green: 0.88, blue: 0.88)       // Light Gray #E0E0E0
-        static let neutral400 = Color(red: 0.74, green: 0.74, blue: 0.74)       // Medium Gray #BDBDBD
-        static let neutral500 = Color(red: 0.62, green: 0.62, blue: 0.62)       // Gray #9E9E9E
-        static let neutral600 = Color(red: 0.46, green: 0.46, blue: 0.46)       // Dark Gray #757575
-        static let neutral700 = Color(red: 0.26, green: 0.26, blue: 0.26)       // Very Dark Gray #424242
-        
+
+        // Neutral Colors - Light Mode
+        private static let lightNeutral100 = Color(red: 0.98, green: 0.98, blue: 0.98)  // Almost White #FAFAFA
+        private static let lightNeutral200 = Color(red: 0.95, green: 0.95, blue: 0.95)  // Very Light Gray #F2F2F2
+        private static let lightNeutral300 = Color(red: 0.88, green: 0.88, blue: 0.88)  // Light Gray #E0E0E0
+        private static let lightNeutral400 = Color(red: 0.74, green: 0.74, blue: 0.74)  // Medium Gray #BDBDBD
+        private static let lightNeutral500 = Color(red: 0.62, green: 0.62, blue: 0.62)  // Gray #9E9E9E
+        private static let lightNeutral600 = Color(red: 0.46, green: 0.46, blue: 0.46)  // Dark Gray #757575
+        private static let lightNeutral700 = Color(red: 0.26, green: 0.26, blue: 0.26)  // Very Dark Gray #424242
+
+        // Neutral Colors - Dark Mode
+        private static let darkNeutral100 = Color(red: 0.11, green: 0.11, blue: 0.12)   // Dark Background #1C1C1F
+        private static let darkNeutral200 = Color(red: 0.14, green: 0.14, blue: 0.15)   // Slightly Lighter #242426
+        private static let darkNeutral300 = Color(red: 0.22, green: 0.22, blue: 0.23)   // Card Background #38383A
+        private static let darkNeutral400 = Color(red: 0.36, green: 0.36, blue: 0.37)   // Border Gray #5C5C5E
+        private static let darkNeutral500 = Color(red: 0.55, green: 0.55, blue: 0.56)   // Medium Gray #8C8C8F
+        private static let darkNeutral600 = Color(red: 0.68, green: 0.68, blue: 0.69)   // Light Gray #AEAEB0
+        private static let darkNeutral700 = Color(red: 0.92, green: 0.92, blue: 0.93)   // Almost White #EBEBED
+
+        // Adaptive Neutral Colors - automatically adjust based on system appearance
+        static let neutral100 = Color(light: lightNeutral100, dark: darkNeutral100)
+        static let neutral200 = Color(light: lightNeutral200, dark: darkNeutral200)
+        static let neutral300 = Color(light: lightNeutral300, dark: darkNeutral300)
+        static let neutral400 = Color(light: lightNeutral400, dark: darkNeutral400)
+        static let neutral500 = Color(light: lightNeutral500, dark: darkNeutral500)
+        static let neutral600 = Color(light: lightNeutral600, dark: darkNeutral600)
+        static let neutral700 = Color(light: lightNeutral700, dark: darkNeutral700)
+
         // Status Colors - Modern and Vibrant
         static let success = Color(red: 0.0, green: 0.85, blue: 0.45)           // Modern Success Green #00D973
-        static let successLight = Color(red: 0.90, green: 0.98, blue: 0.94)     // Ultra Light Success #E6FAF0
+        static let successLight = Color(light: Color(red: 0.90, green: 0.98, blue: 0.94),
+                                       dark: Color(red: 0.0, green: 0.3, blue: 0.2))
         static let warning = Color(red: 1.0, green: 0.60, blue: 0.0)            // Modern Warning Orange #FF9900
-        static let warningLight = Color(red: 1.0, green: 0.95, blue: 0.90)      // Ultra Light Warning #FFF2E6
+        static let warningLight = Color(light: Color(red: 1.0, green: 0.95, blue: 0.90),
+                                       dark: Color(red: 0.3, green: 0.2, blue: 0.0))
         static let error = Color(red: 1.0, green: 0.25, blue: 0.45)             // Modern Error Red #FF4073
-        static let errorLight = Color(red: 1.0, green: 0.92, blue: 0.95)        // Ultra Light Error #FFEBEF
-        
-        // Background Colors - Modern Glassmorphism
-        static let background = Color(red: 0.98, green: 0.99, blue: 1.0)        // Pure White with Blue Tint #FAFDFF
-        static let cardBackground = Color.white.opacity(0.85)                   // Glassmorphism Card
-        static let modalBackground = Color.black.opacity(0.4)                   // Modern Modal Overlay
-        static let glassBackground = Color.white.opacity(0.25)                  // Glass Effect
-        
-        // Text Colors
+        static let errorLight = Color(light: Color(red: 1.0, green: 0.92, blue: 0.95),
+                                     dark: Color(red: 0.3, green: 0.1, blue: 0.15))
+
+        // Background Colors - Adaptive for light/dark mode
+        static let background = Color(light: Color(red: 0.98, green: 0.99, blue: 1.0),
+                                     dark: Color(red: 0.0, green: 0.0, blue: 0.0))
+        static let cardBackground = Color(light: Color.white.opacity(0.85),
+                                         dark: Color(red: 0.14, green: 0.14, blue: 0.15).opacity(0.95))
+        static let modalBackground = Color.black.opacity(0.4)
+        static let glassBackground = Color(light: Color.white.opacity(0.25),
+                                          dark: Color.white.opacity(0.1))
+
+        // Text Colors - Adaptive
         static let textPrimary = neutral700
         static let textSecondary = neutral500
         static let textTertiary = neutral400
@@ -232,12 +270,14 @@ struct DesignSystem {
         )
         
         // Modern background gradients
-        static let backgroundGradient = RadialGradient(
-            colors: [Colors.primaryLight.opacity(0.4), Colors.background],
-            center: .topLeading,
-            startRadius: 0,
-            endRadius: 800
-        )
+        static var backgroundGradient: AnyShapeStyle {
+            AnyShapeStyle(RadialGradient(
+                colors: [Colors.primaryLight.opacity(0.4), Colors.background],
+                center: .topLeading,
+                startRadius: 0,
+                endRadius: 800
+            ))
+        }
         
         static let heroGradient = LinearGradient(
             colors: [Colors.primary, Colors.secondary],

@@ -36,7 +36,7 @@ struct ScanView: View {
                     LazyVStack(spacing: max(24, UIScreen.main.bounds.height * 0.025)) {
                         // Header Card
                         ScanHeaderCard()
-                        
+
                         // Scan Options
                         ScanOptionsCard(
                             onCameraScan: {
@@ -46,10 +46,7 @@ struct ScanView: View {
                                 isShowingImagePicker = true
                             }
                         )
-                        
-                        // Instructions Card
-                        ScanInstructionsCard()
-                        
+
                         // Alternative Action
                         AlternativeActionCard {
                             isShowingAddPrescription = true
